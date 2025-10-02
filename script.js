@@ -1,73 +1,74 @@
-
-// Core UI script used across pages
+// Shared script for menu, helpers and request draft handling
 (function(){
-  // Menu toggle - supports multiple menu button IDs on different pages
-  function setupMenu(btnId, menuId, closeId){
-    const btn = document.getElementById(btnId);
-    const menu = document.getElementById(menuId);
-    const close = document.getElementById(closeId);
-    if(!btn || !menu) return;
-    btn.addEventListener('click', ()=>{ menu.classList.toggle('open'); menu.setAttribute('aria-hidden', menu.classList.contains('open') ? 'false' : 'true'); });
-    if(close) close.addEventListener('click', ()=>{ menu.classList.remove('open'); menu.setAttribute('aria-hidden','true') });
-    // close on ESC
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') { menu.classList.remove('open'); menu.setAttribute('aria-hidden','true') }});
+  function initMenu(){
+    const menuBtn = document.getElementById('menuBtn');
+    const sideMenu = document.getElementById('sideMenu');
+    const closeMenu = document.getElementById('closeMenu');
+    if(menuBtn && sideMenu){
+      menuBtn.addEventListener('click', ()=>{
+        sideMenu.classList.toggle('open');
+        sideMenu.setAttribute('aria-hidden', sideMenu.classList.contains('open') ? 'false' : 'true');
+      });
+    }
+    if(closeMenu && sideMenu){
+      closeMenu.addEventListener('click', ()=>{ sideMenu.classList.remove('open'); sideMenu.setAttribute('aria-hidden','true'); });
+    }
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && sideMenu) sideMenu.classList.remove('open'); });
   }
 
-  // initialize menu buttons for different pages (IDs used in HTML files)
-  document.addEventListener('DOMContentLoaded', ()=>{
-    setupMenu('menuBtn','sideMenu','closeMenu');
-    setupMenu('menuBtn2','sideMenu2','closeMenu2');
-    setupMenu('menuBtn3','sideMenu3','closeMenu3');
-    setupMenu('menuBtn4','sideMenu4','closeMenu4');
-    setupMenu('menuBtn5','sideMenu5','closeMenu5');
-
-    // platform adaptiveness: detect touch devices and desktop
+  function platformDetect(){
     const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
     if(isTouch) document.body.classList.add('is-touch'); else document.body.classList.add('is-desktop');
+  }
 
-    // restore request draft if present
-    const saved = localStorage.getItem('requestDraft');
-    if(saved && document.getElementById('saveDraftBtn')){
+  function restoreDraft(){
+    try{
+      const saved = localStorage.getItem('requestDraft');
+      if(!saved) return;
       const data = JSON.parse(saved);
       const form = document.getElementById('reqForm');
-      if(form){ form.name.value = data.name || ''; form.telegram.value = data.telegram || ''; form.type.value = data.type || 'app'; form.message.value = data.message || ''; }
+      if(!form) return;
+      form.name.value = data.name || '';
+      form.telegram.value = data.telegram || '';
+      form.type.value = data.type || 'app';
+      form.message.value = data.message || '';
       const status = document.getElementById('reqStatus'); if(status) status.textContent='Loaded saved draft.';
-    }
+    }catch(e){/*ignore*/}
+  }
 
-    // save draft button
-    const saveBtn = document.getElementById('saveDraftBtn');
-    if(saveBtn){ saveBtn.addEventListener('click', ()=>{
+  function saveDraftButton(){
+    const btn = document.getElementById('saveDraftBtn');
+    if(!btn) return;
+    btn.addEventListener('click', ()=>{
       const form = document.getElementById('reqForm'); if(!form) return;
       const d = {name: form.name.value, telegram: form.telegram.value, type: form.type.value, message: form.message.value};
       localStorage.setItem('requestDraft', JSON.stringify(d));
-      const status = document.getElementById('reqStatus'); if(status) status.textContent='Draft saved locally.';
-      setTimeout(()=>{ if(status) status.textContent=''; },2500);
-    })}
-  });
+      const status = document.getElementById('reqStatus'); if(status){ status.textContent='Draft saved locally.'; setTimeout(()=>status.textContent='',2200); }
+    });
+  }
 
-  // helper to open external links safely
+  // Helpers exposed globally
   window.openExternal = function(url){ window.open(url,'_blank','noopener'); }
+  window.copyText = function(text){ if(navigator.clipboard) navigator.clipboard.writeText(text).then(()=>{ alert('Copied to clipboard') }).catch(()=>{ prompt('Copy this:',text) }); }
 
-  // copy to clipboard helper
-  window.copyText = function(text){ navigator.clipboard && navigator.clipboard.writeText(text).then(()=>{ alert('Copied to clipboard') }).catch(()=>{ prompt('Copy this:',text) }); }
-
-  // info panel (used by home page 'more info' links)
+  // Info panel for article pages
   window.openInfo = function(key){
     const panel = document.getElementById('infoPanel');
     const content = document.getElementById('infoContent');
     if(!panel || !content) return;
     const data = {
-      tubi: '<h3>Tubi — What to expect</h3><p>Large library of free movies and shows. Ads are present but selection is strong. Available on mobile, smart-TVs and web.</p><p><strong>Tip:</strong> Use the official app store links for updates and safety.</p>',
-      pluto: '<h3>Pluto TV — What to expect</h3><p>Live channels + on-demand library. Best for themed channels like news and classic TV.</p>',
-      crackle: '<h3>Crackle — What to expect</h3><p>Classic movies, occasional originals. Interface is simple and lightweight.</p>',
-      plex: '<h3>Plex — What to expect</h3><p>Offers free ad-supported movies and the option to stream your personal library. Great device support.</p>',
-      filmrise: '<h3>FilmRise — What to expect</h3><p>Strong niche catalogs (crime, documentaries, cult classics). Good for deep-dive binge sessions.</p>'
+      tubi: '<h3>Tubi — Quick Tips</h3><p>Use categories and the search bar. Some titles rotate in and out. The app is updated via store updates.</p>',
+      pluto: '<h3>Pluto TV — Quick Tips</h3><p>Explore channels by category. Use the on-demand section for movie browsing.</p>',
+      crackle: '<h3>Crackle — Quick Tips</h3><p>Best for older films. Sign in to sync watchlist across devices.</p>',
+      plex: '<h3>Plex — Quick Tips</h3><p>Use Plex Pass for premium features. To stream your own files, follow the official Plex server setup guide.</p>',
+      filmrise: '<h3>FilmRise — Quick Tips</h3><p>Great for documentaries. Browse by collection for themed marathons.</p>'
     };
-    content.innerHTML = data[key] || '<p>No info available.</p>';
+    content.innerHTML = data[key] || '<p>No additional info.</p>';
     panel.style.display='block'; panel.setAttribute('aria-hidden','false');
   }
   window.closeInfo = function(){ const panel = document.getElementById('infoPanel'); if(panel){ panel.style.display='none'; panel.setAttribute('aria-hidden','true'); } }
 
+  // bootstrap
+  document.addEventListener('DOMContentLoaded', ()=>{ initMenu(); platformDetect(); restoreDraft(); saveDraftButton(); });
 })();
-
 

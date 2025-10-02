@@ -10,7 +10,7 @@ html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,system-ui,Arial
 .logo{width:44px;height:44;border-radius:10px;background:linear-gradient(135deg,#06b6d4,#7c3aed);display:flex;align-items:center;justify-content:center;color:#041024;font-weight:800}
 .brand-text{font-weight:700}
 .menu-btn{background:transparent;border:0;color:var(--muted);font-size:18px;padding:8px;border-radius:8px;cursor:pointer}
-.side-menu{position:fixed;top:0;left:-320px;width:320px;height:100vh;background:linear-gradient(180deg,#041225,#03121b);padding:28px;transition:left 320ms cubic-bezier(.2,.9,.2,1);z-index:50}
+.side-menu{position:fixed;top:0;left:-360px;width:320px;height:100vh;background:linear-gradient(180deg,#041225,#03121b);padding:28px;transition:left 320ms cubic-bezier(.2,.9,.2,1);z-index:50}
 .side-menu.open{left:0}
 .side-menu .close-menu{position:absolute;top:12px;right:12px;background:transparent;border:0;color:var(--muted);font-size:18px}
 .side-menu nav ul{list-style:none;padding:60px 0 0 0;margin:0}
@@ -36,11 +36,19 @@ html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,system-ui,Arial
 .request-form input,.request-form textarea,.request-form select{width:100%;padding:10px;border-radius:8px;background:#041427;border:1px solid rgba(255,255,255,0.03);color:var(--muted)}
 .row{display:flex;gap:12px;align-items:center}
 .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent);margin:18px 0}
-.topics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.topics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.topic-card{display:block;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);color:inherit;text-decoration:none}
+.ad-slot{background:#071121;border:2px dashed rgba(255,255,255,0.02);padding:16px;border-radius:8px;color:var(--muted);text-align:center;margin-top:12px}
+.ad-top{height:90px}
+.ad-mid{height:250px}
+.ad-bottom{height:90px}
+.ad-inline{height:60px}
+.topic-title{font-weight:700}
+.topic-desc{color:var(--muted);font-size:13px;margin-top:6px}
 .card.small{padding:12px}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
 @media (max-width:900px){.container{margin:80px 16px;padding:16px}.side-menu{width:100%;left:-100%}.side-menu.open{left:0}.topbar{top:6px;padding:10px}} 
 
 /* platform-adaptive helpers */
 body.is-touch .menu-btn{font-size:20px}
 body.is-desktop .brand-text{display:inline-block}
-
