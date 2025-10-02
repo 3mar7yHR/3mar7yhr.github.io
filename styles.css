@@ -1,0 +1,46 @@
+
+:root{
+  --bg:#071226; --card:#0b1220; --muted:#94a3b8; --accent:#06b6d4; --glass: rgba(255,255,255,0.03);
+  --radius:12px; --maxw:1100px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,system-ui,Arial;color:#e6eef6;background:linear-gradient(180deg,var(--bg),#041226)}
+.topbar{position:fixed;left:0;right:0;top:10px;display:flex;align-items:center;justify-content:space-between;padding:10px 20px;z-index:40}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:44px;height:44;border-radius:10px;background:linear-gradient(135deg,#06b6d4,#7c3aed);display:flex;align-items:center;justify-content:center;color:#041024;font-weight:800}
+.brand-text{font-weight:700}
+.menu-btn{background:transparent;border:0;color:var(--muted);font-size:18px;padding:8px;border-radius:8px;cursor:pointer}
+.side-menu{position:fixed;top:0;left:-320px;width:320px;height:100vh;background:linear-gradient(180deg,#041225,#03121b);padding:28px;transition:left 320ms cubic-bezier(.2,.9,.2,1);z-index:50}
+.side-menu.open{left:0}
+.side-menu .close-menu{position:absolute;top:12px;right:12px;background:transparent;border:0;color:var(--muted);font-size:18px}
+.side-menu nav ul{list-style:none;padding:60px 0 0 0;margin:0}
+.side-menu nav li{padding:12px 6px}
+.side-menu a{color:var(--muted);text-decoration:none}
+.container{max-width:var(--maxw);margin:120px auto;padding:22px;display:block}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.45);border:1px solid rgba(255,255,255,0.02)}
+.hero.card{margin-bottom:18px}
+.lead{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.app-card{display:flex;flex-direction:column;gap:12px}
+.app-head{display:flex;gap:12px;align-items:center}
+.app-icon{width:56px;height:56;border-radius:10px;background:#051420;display:flex;align-items:center;justify-content:center;font-weight:800}
+.meta{color:var(--muted);font-size:13px}
+.small{color:var(--muted)}
+.actions{display:flex;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--accent);text-decoration:none}
+.btn.primary{background:linear-gradient(90deg,var(--accent),#7c3aed);color:#001024;border:0}
+.btn.alt{background:transparent;border:1px solid rgba(255,255,255,0.03);color:#fff}
+.site-footer{max-width:var(--maxw);margin:36px auto;color:var(--muted);display:flex;justify-content:space-between;padding:0 22px}
+.close-info{position:absolute;top:12px;right:12px;background:transparent;border:0;color:var(--muted);font-size:18px}
+.request-form label{display:block;margin-bottom:8px}
+.request-form input,.request-form textarea,.request-form select{width:100%;padding:10px;border-radius:8px;background:#041427;border:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+.row{display:flex;gap:12px;align-items:center}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent);margin:18px 0}
+.topics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.card.small{padding:12px}
+@media (max-width:900px){.container{margin:80px 16px;padding:16px}.side-menu{width:100%;left:-100%}.side-menu.open{left:0}.topbar{top:6px;padding:10px}} 
+
+/* platform-adaptive helpers */
+body.is-touch .menu-btn{font-size:20px}
+body.is-desktop .brand-text{display:inline-block}
+
