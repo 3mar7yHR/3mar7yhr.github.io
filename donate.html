@@ -1,0 +1,65 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Donate — FreeStreamHub</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">FS</span><span class="brand-text">FreeStreamHub</span></div>
+    <button id="menuBtn3" class="menu-btn" aria-label="Open menu">☰</button>
+  </header>
+
+  <aside id="sideMenu3" class="side-menu" aria-hidden="true">
+    <button id="closeMenu3" class="close-menu" aria-label="Close menu">✕</button>
+    <nav>
+      <ul>
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="request.html">✉️ Request</a></li>
+        <li><a href="donate.html">💖 Donate</a></li>
+        <li><a href="contact.html">📞 Contact</a></li>
+        <li><a href="topics.html">📚 All Topics</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="container">
+    <article class="card">
+      <h1>Support the Site</h1>
+      <p class="lead">Thanks — any support helps cover hosting, testing and new content. Choose a way to donate below.</p>
+
+      <div class="donate-ways">
+        <a class="btn primary" href="#" onclick="openExternal('https://www.paypal.com/donate?hosted_button_id=YOUR_ID')">Donate with PayPal</a>
+        <a class="btn" href="#" onclick="openExternal('https://www.patreon.com/YOUR_PROFILE')">Support on Patreon</a>
+
+        <div class="card small crypto">
+          <strong>Crypto</strong>
+          <div class="cryptos">
+            <div class="crypto-row"><code id="btc">BTC: 1ExampleBitcoinAddr...</code><button class="btn" onclick="copyText('1ExampleBitcoinAddr...')">Copy</button></div>
+            <div class="crypto-row"><code id="eth">ETH: 0xExampleEthereumAddr...</code><button class="btn" onclick="copyText('0xExampleEthereumAddr...')">Copy</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <h3>Other topics</h3>
+      <div class="topics-grid">
+        <a class="card" href="#">How to Make Thumbnails That Click</a>
+        <a class="card" href="#">Top 7 Free Tools For Creators</a>
+        <a class="card" href="#">Guide: Build a Simple Android App</a>
+        <a class="card" href="#">Best VPNs for Streaming</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div>© FreeStreamHub • 2025</div>
+  </footer>
+</body>
+</html>
+
+
