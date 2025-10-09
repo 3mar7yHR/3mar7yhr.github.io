@@ -1,4 +1,3 @@
-
 :root{
   --bg:#071226; --card:#0b1220; --muted:#94a3b8; --accent:#06b6d4; --glass: rgba(255,255,255,0.03);
   --radius:12px; --maxw:1100px;
@@ -26,7 +25,7 @@ html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,system-ui,Arial
 .app-icon{width:56px;height:56;border-radius:10px;background:#051420;display:flex;align-items:center;justify-content:center;font-weight:800}
 .meta{color:var(--muted);font-size:13px}
 .small{color:var(--muted)}
-.actions{display:flex;gap:10px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--accent);text-decoration:none}
 .btn.primary{background:linear-gradient(90deg,var(--accent),#7c3aed);color:#001024;border:0}
 .btn.alt{background:transparent;border:1px solid rgba(255,255,255,0.03);color:#fff}
@@ -37,18 +36,99 @@ html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,system-ui,Arial
 .row{display:flex;gap:12px;align-items:center}
 .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent);margin:18px 0}
 .topics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.topic-card{display:block;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);color:inherit;text-decoration:none}
-.ad-slot{background:#071121;border:2px dashed rgba(255,255,255,0.02);padding:16px;border-radius:8px;color:var(--muted);text-align:center;margin-top:12px}
-.ad-top{height:90px}
-.ad-mid{height:250px}
-.ad-bottom{height:90px}
-.ad-inline{height:60px}
+.topic-card{display:block;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);color:inherit;text-decoration:none;min-height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.ad-slot {
+  background: #071121;
+  border: 2px dashed rgba(255,255,255,0.02);
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--muted);
+  text-align: center;
+  margin: 16px auto;
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+}
+
+/* Let iframes resize naturally and be visible */
+.ad-slot iframe {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 60px;
+  max-height: none;
+  display: block;
+  margin: 0 auto;
+  border: none;
+}
+
+/* Ad types */
+.ad-top, .ad-bottom {
+  min-height: 90px;
+}
+.ad-mid {
+  min-height: 250px;
+}
+.ad-inline {
+  min-height: 60px;
+}
+
+/* On small screens, make sure wide ads shrink safely */
+@media (max-width: 768px) {
+  .ad-slot iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
 .topic-title{font-weight:700}
 .topic-desc{color:var(--muted);font-size:13px;margin-top:6px}
 .card.small{padding:12px}
 .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
-@media (max-width:900px){.container{margin:80px 16px;padding:16px}.side-menu{width:100%;left:-100%}.side-menu.open{left:0}.topbar{top:6px;padding:10px}} 
+.countdown-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;border-radius:8px;background:rgba(255,255,255,0.01)}
+.muted{color:var(--muted)}
+@media (max-width:900px){
+  .container{margin:80px 16px;padding:16px}
+  .side-menu{width:100%;left:-100%}
+  .side-menu.open{left:0}
+  .topbar{top:6px;padding:10px}
+}
 
-/* platform-adaptive helpers */
-body.is-touch .menu-btn{font-size:20px}
-body.is-desktop .brand-text{display:inline-block}
+/* --- Responsive ad scaling fix --- */
+.ad-slot {
+  text-align: center;
+  overflow: hidden;
+  margin: 16px auto;
+}
+
+/* Desktop default */
+.ad-slot iframe {
+  transform-origin: top center;
+  transform: scale(1);
+  display: inline-block;
+}
+
+/* Medium screens (tablets) */
+@media (max-width: 1024px) {
+  .ad-slot iframe {
+    transform: scale(0.8);
+    width: 910px;   /* 728 / 0.8 */
+    height: 110px;
+  }
+  .ad-slot {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+}
+
+/* Small screens (phones) */
+@media (max-width: 600px) {
+  .ad-slot iframe {
+    transform: scale(0.55);
+    width: 1325px;  /* 728 / 0.55 */
+    height: 164px;
+  }
+  .ad-slot {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}

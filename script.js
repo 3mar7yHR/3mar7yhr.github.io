@@ -68,7 +68,29 @@
   }
   window.closeInfo = function(){ const panel = document.getElementById('infoPanel'); if(panel){ panel.style.display='none'; panel.setAttribute('aria-hidden','true'); } }
 
+  // Countdown helper for ad-free download pages
+  window.startCountdown = function(btnId, seconds){
+    const btn = document.getElementById(btnId);
+    const circle = document.getElementById(btnId + '-circle');
+    if(!btn || !circle) return;
+    let remaining = seconds;
+    btn.disabled = true;
+    btn.classList.add('disabled');
+    circle.textContent = remaining;
+    const interval = setInterval(()=>{
+      remaining -= 1;
+      circle.textContent = remaining;
+      if(remaining <= 0){
+        clearInterval(interval);
+        btn.disabled = false;
+        btn.classList.remove('disabled');
+        btn.classList.add('ready');
+        btn.style.background = '#10b981';
+        btn.textContent = 'Download Now';
+      }
+    }, 1000);
+  }
+
   // bootstrap
   document.addEventListener('DOMContentLoaded', ()=>{ initMenu(); platformDetect(); restoreDraft(); saveDraftButton(); });
 })();
-

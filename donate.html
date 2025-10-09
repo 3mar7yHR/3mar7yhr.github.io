@@ -1,58 +1,52 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Donate — FreeStreamHub</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Donate — 3mar Network</title>
   <link rel="stylesheet" href="styles.css">
   <script defer src="script.js"></script>
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="logo">FS</span><span class="brand-text">FreeStreamHub</span></div>
+    <div class="brand"><span class="logo">3M</span><span class="brand-text">3mar Network</span></div>
     <button id="menuBtn" class="menu-btn" aria-label="Open menu">☰</button>
   </header>
-
   <aside id="sideMenu" class="side-menu" aria-hidden="true">
     <button id="closeMenu" class="close-menu" aria-label="Close menu">✕</button>
-    <nav>
-      <ul>
-        <li><a href="index.html">🏠 Home</a></li>
-        <li><a href="top5_movies&tvshos_apps.html">🎞 Top 5 Movie & TV Apps</a></li>
-        <li><a href="request.html">✉️ Request</a></li>
-        <li><a href="donate.html">💖 Donate</a></li>
-        <li><a href="contact.html">📞 Contact</a></li>
-      </ul>
-    </nav>
+    <nav><ul><li><a href="index.html">🏠 Home</a></li><li><a href="top5_movies&tvshos_apps.html">🎞 Top 5</a></li><li><a href="request.html">✉️ Request</a></li><li><a href="donate.html">💖 Donate</a></li><li><a href="contact.html">📞 Contact</a></li></ul></nav>
   </aside>
 
   <main class="container">
     <article class="card">
-      <h1>Support FreeStreamHub</h1>
-      <p class="lead">Thank you — any donation helps keep the site online and the research going. Choose a method below.</p>
+      <h1>Support 3mar Network</h1>
+      <p class="lead">Your donations help keep 3mar Network online, improve content, and cover hosting costs. Every bit of support is deeply appreciated!</p>
 
-      <div class="donate-ways">
-        <a class="btn" href="#" onclick="openExternal('#')">Donate with PayPal (add later)</a>
-        <a class="btn" href="#" onclick="openExternal('#')">Support on Patreon (add later)</a>
-
-        <div class="card small crypto">
-          <strong>Crypto</strong>
-          <div class="cryptos">
-            <div class="crypto-row"><code id="btc">BTC: 16Y1diveg8fPpCkQ47FvUU9tTw6DFGbWgT</code><button class="btn" onclick="copyText('16Y1diveg8fPpCkQ47FvUU9tTw6DFGbWgT')">Copy</button></div>
-            <div class="crypto-row"><code id="usdt">USDT (TRC20): TXvNLG69NqXPuQv7TV8VvijhQDb1fmXdsV</code><button class="btn" onclick="copyText('TXvNLG69NqXPuQv7TV8VvijhQDb1fmXdsV')">Copy</button></div>
-            <div class="crypto-row"><code id="usdc">USDC / ETH (ERC20): 0xf1ed94847b69d8aa37b73dcf6f5e66a33e147853</code><button class="btn" onclick="copyText('0xf1ed94847b69d8aa37b73dcf6f5e66a33e147853')">Copy</button></div>
-          </div>
-        </div>
+      <!-- PayPal first for visibility -->
+      <div class="crypto-address">
+        <code id="paypal">PayPal:</code>
+        <a href="https://www.paypal.com/donate/?hosted_button_id=J824FBP5KVRS8" target="_blank" rel="noopener" class="btn primary">
+          Donate via PayPal
+        </a>
       </div>
 
       <div class="divider"></div>
 
-      <p class="small">If you prefer other ways to support the site (invoices, sponsorships) contact me via the <a href="contact.html">Contact</a> page.</p>
+      <div class="crypto-address">
+        <code id="btc">BTC: 16Y1diveg8fPpCkQ47FvUU9tTw6DFGbWgT</code>
+        <button class="btn" onclick="copyText('16Y1diveg8fPpCkQ47FvUU9tTw6DFGbWgT')">Copy</button>
+      </div>
+
+      <div class="crypto-address">
+        <code id="usdt">USDT (TRC20): TXvNLG69NqXPuQv7TV8VvijhQDb1fmXdsV</code>
+        <button class="btn" onclick="copyText('TXvNLG69NqXPuQv7TV8VvijhQDb1fmXdsV')">Copy</button>
+      </div>
+
+      <div class="crypto-address">
+        <code id="usdc">USDC/ETH (ERC20): 0xf1ed94847b69d8aa37b73dcf6f5e66a33e147853</code>
+        <button class="btn" onclick="copyText('0xf1ed94847b69d8aa37b73dcf6f5e66a33e147853')">Copy</button>
+      </div>
     </article>
   </main>
-
-  <footer class="site-footer">
-    <div>© FreeStreamHub • 2025</div>
-  </footer>
 </body>
 </html>
