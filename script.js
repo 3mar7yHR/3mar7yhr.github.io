@@ -68,15 +68,26 @@
   }
   window.closeInfo = function(){ const panel = document.getElementById('infoPanel'); if(panel){ panel.style.display='none'; panel.setAttribute('aria-hidden','true'); } }
 
-  // Countdown helper for ad-free download pages
+  // Countdown helper for ad-free download pages with redirection
   window.startCountdown = function(btnId, seconds){
     const btn = document.getElementById(btnId);
     const circle = document.getElementById(btnId + '-circle');
     if(!btn || !circle) return;
+
+    // Links assigned by button ID
+    const links = {
+      'btn-tubi': 'https://www.mediafire.com/file/778df5e8sa7qnyd/Tubi_v8.8.0_%2528add-free%2529.apk/file',
+      'btn-pluto': 'https://www.mediafire.com/file/6yn28iv25xlwnkx/Pluto_TV_v5.37.1_%2528Adfree%2529.apk/file',
+      'btn-crackle': 'https://www.mediafire.com/file/segmv4ofrqy7j44/Crackle_7.1.2_AddFree.apk/file',
+      'btn-plex': 'https://www.mediafire.com/file/domvco2qy94x5ik/Plex-ad-free-v10.16.0.758.apk/file',
+      'btn-filmrise': 'https://www.mediafire.com/file/sgpfwjv0gj1e4u7/FilmRise_v9.4_%2528AdFree%2529.apk/file'
+    };
+
     let remaining = seconds;
     btn.disabled = true;
     btn.classList.add('disabled');
     circle.textContent = remaining;
+
     const interval = setInterval(()=>{
       remaining -= 1;
       circle.textContent = remaining;
@@ -87,6 +98,7 @@
         btn.classList.add('ready');
         btn.style.background = '#10b981';
         btn.textContent = 'Download Now';
+        btn.onclick = ()=> window.open(links[btnId], '_blank');
       }
     }, 1000);
   }
